@@ -79,7 +79,11 @@
           >
             <!-- Font Awesome Pro 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) -->
             <path
-              :style="[favorites && favorites.includes(todo.id) ? { fill: 'orange' } : {}]"
+              :style="[
+                favorites && favorites.includes(todo.id)
+                  ? { fill: 'orange' }
+                  : {},
+              ]"
               d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"
             />
           </svg>
@@ -246,32 +250,33 @@ export default Vue.extend({
         .then((res) => res.json())
         .then((res) => {
           this.todos.unshift(res);
-          this.showSuccessNotification()
+          this.showSuccessNotification();
         });
     },
     addToFavorites(todo) {
       // Implement logic to add a todo to favorites
-      if (this.favorites.includes(todo.id)) {
+      if (this.favorites && this.favorites.includes(todo.id)) {
         this.favorites.splice(this.favorites.indexOf(todo.id), 1);
-        this.showInfoNotification('Todo item has been removed from favorites')
+        this.showInfoNotification("Todo item has been removed from favorites");
       } else {
-        this.favorites.push(todo.id)
-        this.showInfoNotification('Todo item has been added to favorites')
+        console.log(this.favorites);
+        this.favorites.push(todo.id);
+        this.showInfoNotification("Todo item has been added to favorites");
       }
       // Save favorites to localStorage
       localStorage.setItem("favorites", JSON.stringify(this.favorites));
       this.getFavorite();
-      
     },
     changePage(page) {
       this.currentPage = page;
     },
     getFavorite() {
-      this.favorites = JSON.parse(localStorage.getItem("favorites"));
+      if (JSON.parse(localStorage.getItem("favorites") !== null)) {
+        this.favorites = JSON.parse(localStorage.getItem("favorites"));
+      }
     },
     showSuccessNotification() {
-      this.notificationMessage =
-        "Todo item has been added to list";
+      this.notificationMessage = "Todo item has been added to list";
       this.notificationType = "success";
       this.showNotification = true;
     },
