@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -11,12 +12,19 @@ const routes: Array<RouteConfig> = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
+    path: '/profile',
+    name: 'profile',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    // which is lazy-loaded when the route is visited.../views/ProfileView.vue
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProfileView.vue'),
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("nux-game-uid") === null) {
+        next('/');
+      } else {
+        next();
+      }
+    }
   }
 ]
 

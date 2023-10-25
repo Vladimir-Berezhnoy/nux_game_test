@@ -1,0 +1,35 @@
+:root {
+  --grey-300: #E0E0E0;
+  --grey-400: #BDBDBD;
+  --grey-700: #616161;
+  --grey-800: #424242;
+
+  --success-color: #519945;
+  --error-color: #F44336;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+label, button, input {
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+body {
+  margin: 0;
+}
