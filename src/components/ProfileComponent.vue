@@ -339,6 +339,11 @@ export default Vue.extend({
     padding: 5px 10px;
     border-radius: 5px;
     min-width: 80px;
+    &:disabled {
+      cursor: default;
+      background-color: #a5d6a7;
+      color: #eeeeee;
+    }
   }
 }
 
